@@ -168,43 +168,92 @@
     <div class="mobile-menu-overlay"></div>
 
     <!-- Main Container -->
-
     <div class="main-container">
       <div class="pd-ltr-20">
         <div class="card-box mb-30">
-          <h2 class="h4 pd-20">Action Products</h2>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>S.N</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Brand</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="table-plus">1</td>
-                <td>Image</td>
-                <td>Asus laptop</td>
-                <td>Laptop</td>
-                <td>ASUS</td>
-                <td>100</td>
-                <td>20,000 BDT</td>
-                <th>
-                  <a href="edit-product.html" class="micon dw dw-edit-1"
-                    >Edit
-                  </a>
-                  |
-                  <a href="" class="micon dw dw-delete-3"> Delete</a>
-                </th>
-              </tr>
-            </tbody>
-          </table>
+          <h2 class="h4 pd-20">Edit Product</h2>
+          <div class="pd-20 card-box mb-30">
+            <form>
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Product Name</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="MacBook Pro 16GB 2021.."
+                    value="MacBook Pro 16GB 2021"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Category</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <select class="custom-select form-control">
+                    <option value="">---Select Category---</option>
+                    <option value="Laptop" selected>Laptop</option>
+                    <option value="Phone">Phone</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label">Brand</label>
+                <div class="col-sm-12 col-md-10">
+                  <select class="custom-select form-control">
+                    <option value="">---Select Brand---</option>
+                    <option value="Apple" selected>Apple</option>
+                    <option value="Asus">Asus</option>
+                    <option value="Huawei">Huawei</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Quantity</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="100"
+                    value="100"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label">Price</label>
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="2,20,000 BDT"
+                    value="2,20,000 BDT"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Add Image</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <input class="form-control" type="file" />
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-2" style="text-align: center">
+                <input
+                  class="btn btn-primary"
+                  type="submit"
+                  name="submit"
+                  id=""
+                  value="Edit Product"
+                />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
