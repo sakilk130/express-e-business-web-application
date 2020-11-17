@@ -125,7 +125,7 @@
                   <a href="add-new-product.html">Add New Product</a>
                 </li>
                 <li>
-                  <a href="manage-product.html">Manage Products</a>
+                  <a href="action-product.html">Manage Products</a>
                 </li>
               </ul>
             </li>
@@ -167,7 +167,7 @@
               <ul class="submenu">
                 <li><a href="#">All Customers</a></li>
                 <li><a href="#">Add New Customer</a></li>
-                <li><a href="#">Action Customer</a></li>
+                <li><a href="#">Manage Customers</a></li>
               </ul>
             </li>
           </ul>
@@ -177,37 +177,64 @@
     <div class="mobile-menu-overlay"></div>
 
     <!-- Main Container -->
-
     <div class="main-container">
       <div class="pd-ltr-20">
         <div class="card-box mb-30">
-          <h2 class="h4 pd-20">Manage Sub-Categories</h2>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>S.N</th>
-                <th>Category</th>
-                <th>Sub-Category</th>
-                <th>Creation Date</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="table-plus">1</td>
-                <td>Electronics</td>
-                <td>Phone</td>
-                <td>17/11/2020</td>
-                <td>
-                  <a href="edit-sub-category.html" class="micon dw dw-edit-1"
-                    >Edit
-                  </a>
-                  |
-                  <a href="" class="micon dw dw-delete-3"> Delete</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <h2 class="h4 pd-20">Edit Sub-Category</h2>
+          <div class="pd-20 card-box mb-30">
+            <form>
+              <!-- Category Name-->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Select Category</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <select class="custom-select form-control">
+                    <option value="">---Select Category---</option>
+                    <option value="Electronics" selected>Electronics</option>
+                    <option value="Book">Book</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Sub-Category Name</label
+                >
+
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    type="text"
+                    name="product-details"
+                    class="form-control"
+                    value="Phone"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Creation Date</label
+                >
+
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    type="text"
+                    name="product-details"
+                    class="form-control"
+                    value="17/11/2020"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-2" style="text-align: center">
+                <input
+                  class="btn btn-primary"
+                  type="submit"
+                  name="submit"
+                  id=""
+                  value="Edit Sub-Category"
+                />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
