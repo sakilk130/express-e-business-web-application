@@ -167,7 +167,7 @@
               <ul class="submenu">
                 <li><a href="all-customers.html">All Customers</a></li>
                 <li><a href="add-new-customer.html">Add New Customer</a></li>
-                <li><a href="manage-customer.html">Manage Customer</a></li>
+                <li><a href="manage-customer.html">Manage Customers</a></li>
               </ul>
             </li>
           </ul>
@@ -177,41 +177,66 @@
     <div class="mobile-menu-overlay"></div>
 
     <!-- Main Container -->
-
     <div class="main-container">
       <div class="pd-ltr-20">
         <div class="card-box mb-30">
-          <h2 class="h4 pd-20">Delivered Orders</h2>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>S.N</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Contact No.</th>
-                <th>Shipping Address</th>
-                <th>Product Details</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Order Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="table-plus">1</td>
-                <td>Sakil Khan</td>
-                <td>Sakilk130@gmail.com</td>
-                <td>01721214996</td>
-                <td>Dhaka, Bangladesh</td>
-                <td>MacBook Pro 16GB 2021</td>
-                <td>1</td>
-                <td>2,20,000 BDT</td>
-                <td>17/11/2020</td>
-                <td>Delivered</td>
-              </tr>
-            </tbody>
-          </table>
+          <h2 class="h4 pd-20">Edit Customer</h2>
+          <div class="pd-20 card-box mb-30">
+            <form>
+              <!-- Customer Name -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label">Name</label>
+                <div class="col-sm-12 col-md-10">
+                  <input class="form-control" type="text" value="Sakil Khan" />
+                </div>
+              </div>
+
+              <!-- Customer Email -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label">Email</label>
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    value="sakilk130@gmail.com"
+                  />
+                </div>
+              </div>
+
+              <!-- Contact No. -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Contact No.</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <input class="form-control" type="text" value="01721214996" />
+                </div>
+              </div>
+              <!-- Shipping Address -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Shipping Address</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    type="text"
+                    name="product-description"
+                    class="form-control"
+                    value="Dhaka, Bangladesh"
+                  />
+                </div>
+              </div>
+              <!-- Submit -->
+              <div class="col-sm-12 col-md-2" style="text-align: center">
+                <input
+                  class="btn btn-primary"
+                  type="submit"
+                  name="submit"
+                  value="Edit Customer"
+                />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
