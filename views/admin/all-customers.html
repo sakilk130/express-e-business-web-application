@@ -125,7 +125,7 @@
                   <a href="add-new-product.html">Add New Product</a>
                 </li>
                 <li>
-                  <a href="action-product.html">Manage Products</a>
+                  <a href="manage-product.html">Manage Products</a>
                 </li>
               </ul>
             </li>
@@ -167,7 +167,7 @@
               <ul class="submenu">
                 <li><a href="all-customers.html">All Customers</a></li>
                 <li><a href="add-new-customer.html">Add New Customer</a></li>
-                <li><a href="#">Manage Customers</a></li>
+                <li><a href="#">Action Customer</a></li>
               </ul>
             </li>
           </ul>
@@ -177,64 +177,33 @@
     <div class="mobile-menu-overlay"></div>
 
     <!-- Main Container -->
+
     <div class="main-container">
       <div class="pd-ltr-20">
         <div class="card-box mb-30">
-          <h2 class="h4 pd-20">Add Sub-Category</h2>
-          <div class="pd-20 card-box mb-30">
-            <form>
-              <!-- Category Name-->
-              <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label"
-                  >Select Category</label
-                >
-                <div class="col-sm-12 col-md-10">
-                  <select class="custom-select form-control">
-                    <option value="">---Select Category---</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Book">Book</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label"
-                  >Sub-Category Name</label
-                >
-
-                <div class="col-sm-12 col-md-10">
-                  <input
-                    type="text"
-                    name="product-details"
-                    class="form-control"
-                    placeholder="Sub-Category Name.."
-                  />
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label"
-                  >Creation Date</label
-                >
-
-                <div class="col-sm-12 col-md-10">
-                  <input
-                    type="date"
-                    name="product-details"
-                    class="form-control"
-                    placeholder="Drescription"
-                  />
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-2" style="text-align: center">
-                <input
-                  class="btn btn-primary"
-                  type="submit"
-                  name="submit"
-                  id=""
-                  value="Add Sub-Category"
-                />
-              </div>
-            </form>
-          </div>
+          <h2 class="h4 pd-20">All Customers</h2>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>S.N</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact No.</th>
+                <th>Shipping Address</th>
+                <th>Registration Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="table-plus">1</td>
+                <td>Sakil Khan</td>
+                <td>sakilk130@gmail.com</td>
+                <td>01721214996</td>
+                <td>Dhaka, Bangladesh.</td>
+                <td>17/11/2020</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

@@ -125,7 +125,7 @@
                   <a href="add-new-product.html">Add New Product</a>
                 </li>
                 <li>
-                  <a href="action-product.html">Manage Products</a>
+                  <a href="manage-product.html">Manage Products</a>
                 </li>
               </ul>
             </li>
@@ -180,57 +180,96 @@
     <div class="main-container">
       <div class="pd-ltr-20">
         <div class="card-box mb-30">
-          <h2 class="h4 pd-20">Add Sub-Category</h2>
+          <h2 class="h4 pd-20">Add New Customer</h2>
           <div class="pd-20 card-box mb-30">
             <form>
-              <!-- Category Name-->
+              <!-- Customer Name -->
               <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label"
-                  >Select Category</label
-                >
-                <div class="col-sm-12 col-md-10">
-                  <select class="custom-select form-control">
-                    <option value="">---Select Category---</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Book">Book</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label"
-                  >Sub-Category Name</label
-                >
-
+                <label class="col-sm-12 col-md-2 col-form-label">Name</label>
                 <div class="col-sm-12 col-md-10">
                   <input
+                    class="form-control"
                     type="text"
-                    name="product-details"
-                    class="form-control"
-                    placeholder="Sub-Category Name.."
+                    placeholder="Enter Name"
                   />
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label"
-                  >Creation Date</label
-                >
 
+              <!-- Customer Email -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label">Email</label>
                 <div class="col-sm-12 col-md-10">
                   <input
-                    type="date"
-                    name="product-details"
                     class="form-control"
-                    placeholder="Drescription"
+                    type="text"
+                    placeholder="test@test.com"
                   />
                 </div>
               </div>
+
+              <!-- Contact No. -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Contact No.</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="+8801..."
+                  />
+                </div>
+              </div>
+              <!-- Shipping Address -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Shipping Address</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <textarea
+                    name="product-description"
+                    class="form-control"
+                    cols="30"
+                    rows="10"
+                    placeholder="Shipping Address.."
+                  ></textarea>
+                </div>
+              </div>
+              <!-- Password -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Password</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    class="form-control"
+                    type="password"
+                    placeholder="Enter Password"
+                  />
+                </div>
+              </div>
+
+              <!--Confirm Password -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Confirm Password</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    class="form-control"
+                    type="password"
+                    placeholder="Enter Password"
+                  />
+                </div>
+              </div>
+
+              <!-- Submit -->
               <div class="col-sm-12 col-md-2" style="text-align: center">
                 <input
                   class="btn btn-primary"
                   type="submit"
                   name="submit"
-                  id=""
-                  value="Add Sub-Category"
+                  value="Add Customer"
                 />
               </div>
             </form>
