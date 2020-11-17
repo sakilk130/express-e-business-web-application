@@ -125,7 +125,7 @@
                   <a href="add-new-product.html">Add New Product</a>
                 </li>
                 <li>
-                  <a href="action-product.html">Action Product</a>
+                  <a href="action-product.html">Manage Products</a>
                 </li>
               </ul>
             </li>
@@ -136,7 +136,7 @@
               </a>
               <ul class="submenu">
                 <li><a href="#">All Orders</a></li>
-                <li><a href="#">Action Orders</a></li>
+                <li><a href="#">Manage Orders</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -147,7 +147,7 @@
               <ul class="submenu">
                 <li><a href="#">All Categories </a></li>
                 <li><a href="#">Add Category</a></li>
-                <li><a href="#">Action Category</a></li>
+                <li><a href="#">Manage Category</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -158,7 +158,7 @@
               <ul class="submenu">
                 <li><a href="#">All Customers</a></li>
                 <li><a href="#">Add New Customer</a></li>
-                <li><a href="#">Action Customer</a></li>
+                <li><a href="#">Manage Customers</a></li>
               </ul>
             </li>
           </ul>
@@ -174,6 +174,36 @@
           <h2 class="h4 pd-20">Edit Product</h2>
           <div class="pd-20 card-box mb-30">
             <form>
+              <!-- Select Category -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Select Category</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <select class="custom-select form-control">
+                    <option value="">---Select Category---</option>
+                    <option value="Books">Books</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Fashion">Fashion</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Select Sub-Category -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Select Sub-Category</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <select class="custom-select form-control">
+                    <option value="">---Select Sub-Category---</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="TV">TV</option>
+                    <option value="AC">AC</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Product Name -->
               <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label"
                   >Product Name</label
@@ -183,46 +213,72 @@
                     class="form-control"
                     type="text"
                     placeholder="MacBook Pro 16GB 2021.."
-                    value="MacBook Pro 16GB 2021"
                   />
                 </div>
               </div>
+
+              <!-- Product Brand -->
               <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label"
-                  >Category</label
+                  >Product Brand</label
                 >
                 <div class="col-sm-12 col-md-10">
-                  <select class="custom-select form-control">
-                    <option value="">---Select Category---</option>
-                    <option value="Laptop" selected>Laptop</option>
-                    <option value="Phone">Phone</option>
-                  </select>
+                  <input class="form-control" type="text" placeholder="Apple" />
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Brand</label>
-                <div class="col-sm-12 col-md-10">
-                  <select class="custom-select form-control">
-                    <option value="">---Select Brand---</option>
-                    <option value="Apple" selected>Apple</option>
-                    <option value="Asus">Asus</option>
-                    <option value="Huawei">Huawei</option>
-                  </select>
-                </div>
-              </div>
+              <!-- Description -->
               <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label"
-                  >Quantity</label
+                  >Product Description</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <textarea
+                    name="product-description"
+                    class="form-control"
+                    cols="30"
+                    rows="10"
+                    placeholder="Product Description....."
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Shipping Charge -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Shipping Charge</label
                 >
                 <div class="col-sm-12 col-md-10">
                   <input
                     class="form-control"
                     type="text"
-                    placeholder="100"
-                    value="100"
+                    placeholder="100 BDT"
                   />
                 </div>
               </div>
+
+              <!-- Product Availability -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Product Availability</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <select class="custom-select form-control">
+                    <option value="In Stock">In Stock</option>
+                    <option value="Out Of Stock">Out Of Stock</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Stock Count -->
+              <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"
+                  >Product Stock</label
+                >
+                <div class="col-sm-12 col-md-10">
+                  <input class="form-control" type="text" placeholder="200" />
+                </div>
+              </div>
+
+              <!-- Price -->
               <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Price</label>
                 <div class="col-sm-12 col-md-10">
@@ -230,10 +286,11 @@
                     class="form-control"
                     type="text"
                     placeholder="2,20,000 BDT"
-                    value="2,20,000 BDT"
                   />
                 </div>
               </div>
+
+              <!-- Image -->
               <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label"
                   >Add Image</label
