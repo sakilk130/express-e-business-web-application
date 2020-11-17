@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const exSession = require('express-session');
 const cookieParser = require('cookie-parser');
 const app = express();
+const login = require('./controller/login');
+const index = require('./controller/index');
 
 //config
 app.set('view engine', 'ejs');
@@ -18,16 +20,14 @@ app.use(
   })
 );
 
-// app.use(cookieParser());
-// app.use('/login', login);
-// app.use('/home', home);
+app.use(cookieParser());
+app.use('/', login);
+app.use('/index', index);
+
 // app.use('/logout', logout);
 // app.use('/user', user);
 
 //route
-app.get('/', (req, res) => {
-  res.send('Hello from express server');
-});
 
 app.get('*', (req, res) => {
   res.send('404 not found');
