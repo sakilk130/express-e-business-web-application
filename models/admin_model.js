@@ -17,7 +17,7 @@ module.exports = {
     });
   },
   getById: function (user, callback) {
-    var sql = "SELECT * FROM user WHERE id='" + user.id + "'";
+    var sql = "SELECT * FROM customers WHERE id='" + user.id + "'";
     db.getResults(sql, function (results) {
       callback(results);
     });
@@ -60,12 +60,16 @@ module.exports = {
   },
   update: function (user, callback) {
     sql =
-      "UPDATE user SET username='" +
-      user.username +
-      "',password='" +
-      user.password +
-      "', type='" +
-      user.type +
+      "UPDATE customers SET name='" +
+      user.name +
+      "',email='" +
+      user.email +
+      "', phone='" +
+      user.phone +
+      "',address='" +
+      user.address +
+      "',registration_date='" +
+      user.registration_date +
       "' where id='" +
       user.id +
       "'";
@@ -73,8 +77,9 @@ module.exports = {
       callback(status);
     });
   },
+
   delete: function (user, callback) {
-    sql = "DELETE FROM user WHERE id='" + user.id + "'";
+    sql = "DELETE FROM customers WHERE id='" + user.id + "'";
     db.execute(sql, function (status) {
       callback(status);
     });

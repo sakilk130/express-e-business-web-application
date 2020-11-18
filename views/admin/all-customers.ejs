@@ -166,7 +166,7 @@
               <ul class="submenu">
                 <li><a href="/admin/all_customers">All Customers</a></li>
                 <li><a href="/admin/add_new_customer">Add New Customer</a></li>
-                <li><a href="manage-customer.html">Manage Customer</a></li>
+                <li><a href="/admin/manage_customer">Manage Customer</a></li>
               </ul>
             </li>
           </ul>
@@ -195,7 +195,7 @@
             <tbody>
               <% for(var i=0; i< customersInfo.length; i++ ){ %>
               <tr>
-                <td class="table-plus">1</td>
+                <td class="table-plus"><%=i+1 %></td>
                 <td><%=customersInfo[i].name %></td>
                 <td><%= customersInfo[i].email %></td>
                 <td><%= customersInfo[i].phone %></td>
