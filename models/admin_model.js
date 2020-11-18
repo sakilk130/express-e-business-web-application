@@ -22,20 +22,37 @@ module.exports = {
       callback(results);
     });
   },
-  getAll: function (callback) {
-    var sql = 'select * from user';
+
+  getByEmail: function (user, callback) {
+    var sql = "SELECT * FROM user WHERE email='" + user.email + "'";
     db.getResults(sql, function (results) {
       callback(results);
     });
   },
+
+  getAllCustomers: function (user, callback) {
+    var sql = "select * from customers WHERE store='" + user.email + "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+
   insert: function (user, callback) {
     var sql =
-      "INSERT INTO user (username, password, type) VALUES ('" +
-      user.username +
+      "INSERT INTO customers (name, email, password, phone, address, registration_date, store) VALUES ('" +
+      user.name +
+      "' , '" +
+      user.email +
       "' , '" +
       user.password +
-      "' , '" +
-      user.type +
+      "', '" +
+      user.phone +
+      "', '" +
+      user.address +
+      "', '" +
+      user.registration_date +
+      "', '" +
+      user.store +
       "')";
     db.execute(sql, function (status) {
       callback(status);
