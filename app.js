@@ -4,7 +4,8 @@ const exSession = require('express-session');
 const cookieParser = require('cookie-parser');
 const app = express();
 const login = require('./controller/login');
-const index = require('./controller/index');
+const admin = require('./controller/admin');
+const logout = require('./controller/logout');
 
 //config
 app.set('view engine', 'ejs');
@@ -22,9 +23,9 @@ app.use(
 
 app.use(cookieParser());
 app.use('/', login);
-app.use('/index', index);
+app.use('/admin', admin);
+app.use('/logout', logout);
 
-// app.use('/logout', logout);
 // app.use('/user', user);
 
 //route
