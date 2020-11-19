@@ -241,6 +241,8 @@ router.get('/edit_orders/:id', (req, res) => {
     res.redirect('/');
   }
 });
+
+// Edit Orders--POST
 router.post('/edit_orders/:id', (req, res) => {
   var orderInfo = {
     id: req.params.id,
@@ -309,6 +311,63 @@ router.post('/delete_delivered_order/:id', (req, res) => {
       res.redirect('/admin/delivered_orders');
     } else {
       res.send('Delete failed');
+    }
+  });
+});
+
+// In Process Orders-->GET
+router.get('/in_process_orders', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var admininfo = {
+      email: req.cookies['uname'],
+      status: 'In Process',
+    };
+    admin_model.getPendingOrder(admininfo, function (results) {
+      admin_model.getByEmail(admininfo, function (results2) {
+        res.render('admin/in-process-orders', {
+          orders: results,
+          admininfo: results2,
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+// In Process Orders Edit-->GET
+router.get('/edit_orders_in_process/:id', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var admininfo = {
+      email: req.cookies['uname'],
+      status: 'In Process',
+      id: req.params.id,
+    };
+    admin_model.getPendingOrderById(admininfo, function (results) {
+      admin_model.getByEmail(admininfo, function (results2) {
+        res.render('admin/edit-orders', {
+          orders: results,
+          admininfo: results2,
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+// Edit Orders--POST
+router.post('/edit_orders_in_process/:id', (req, res) => {
+  var orderInfo = {
+    id: req.params.id,
+    email: req.cookies['uname'],
+    last_update: new Date().toLocaleDateString(),
+    status: req.body.status,
+  };
+  admin_model.updateOrder(orderInfo, function (status) {
+    if (status) {
+      res.redirect('/admin/in_process_orders');
+    } else {
+      res.send('Not Update');
     }
   });
 });
