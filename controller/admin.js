@@ -181,4 +181,24 @@ router.post('/delete_customer/:id', (req, res) => {
     }
   });
 });
+
+// All Orders--GET
+router.get('/all_orders', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var admininfo = {
+      email: req.cookies['uname'],
+    };
+    admin_model.getAllOrder(admininfo, function (results) {
+      admin_model.getByEmail(admininfo, function (results2) {
+        res.render('admin/all-orders', {
+          orders: results,
+          admininfo: results2,
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
 module.exports = router;

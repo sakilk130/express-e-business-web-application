@@ -84,4 +84,16 @@ module.exports = {
       callback(status);
     });
   },
+
+  // Order_Managment
+  // Get All Order
+  getAllOrder: function (user, callback) {
+    var sql =
+      "SELECT customers.name AS username, customers.email AS useremail, customers.phone AS userphone, customers.address AS useraddress, orders.quantity AS orderquantity, orders.order_date AS ordersorder_date, orders.status AS ordersstatus, products.product_name AS productname, products.product_brand AS productbrand, products.product_description AS productdescription, products.product_price AS productprice FROM customers JOIN orders ON customers.id = orders.customer_id JOIN products ON products.id = orders.product_id WHERE customers.store='" +
+      user.email +
+      "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
 };
