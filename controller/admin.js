@@ -201,4 +201,116 @@ router.get('/all_orders', (req, res) => {
   }
 });
 
+// Pending Orders--GET
+router.get('/pending_orders', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var admininfo = {
+      email: req.cookies['uname'],
+      status: 'Pending',
+    };
+    admin_model.getPendingOrder(admininfo, function (results) {
+      admin_model.getByEmail(admininfo, function (results2) {
+        res.render('admin/pending-orders', {
+          orders: results,
+          admininfo: results2,
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+// Edit Orders Page Render
+router.get('/edit_orders/:id', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var admininfo = {
+      email: req.cookies['uname'],
+      status: 'Pending',
+      id: req.params.id,
+    };
+    admin_model.getPendingOrderById(admininfo, function (results) {
+      admin_model.getByEmail(admininfo, function (results2) {
+        res.render('admin/edit-orders', {
+          orders: results,
+          admininfo: results2,
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+router.post('/edit_orders/:id', (req, res) => {
+  var orderInfo = {
+    id: req.params.id,
+    email: req.cookies['uname'],
+    last_update: new Date().toLocaleDateString(),
+    status: req.body.status,
+  };
+  admin_model.updateOrder(orderInfo, function (status) {
+    if (status) {
+      res.redirect('/admin/pending_orders');
+    } else {
+      res.send('Not Update');
+    }
+  });
+});
+
+// Delivered Orders--GET
+router.get('/delivered_orders', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var admininfo = {
+      email: req.cookies['uname'],
+      status: 'Delivered',
+    };
+    admin_model.getPendingOrder(admininfo, function (results) {
+      admin_model.getByEmail(admininfo, function (results2) {
+        res.render('admin/delivered-orders', {
+          orders: results,
+          admininfo: results2,
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+// Delete Delivered Orders--GET
+router.get('/delete_delivered_order/:id', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var orderInfo = {
+      id: req.params.id,
+    };
+    var admininfo = {
+      email: req.cookies['uname'],
+    };
+    admin_model.getOrderById(orderInfo, function (results) {
+      admin_model.getByEmail(admininfo, function (results2) {
+        res.render('admin/delete-delivered-order', {
+          orderInfo: results,
+          admininfo: results2,
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+// Delete Delivered Orders--POST
+router.post('/delete_delivered_order/:id', (req, res) => {
+  var customersInfo = {
+    id: req.params.id,
+  };
+  admin_model.deleteOrder(customersInfo, function (status) {
+    if (status) {
+      res.redirect('/admin/delivered_orders');
+    } else {
+      res.send('Delete failed');
+    }
+  });
+});
+
 module.exports = router;

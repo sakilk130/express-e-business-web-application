@@ -180,28 +180,24 @@
     <div class="main-container">
       <div class="pd-ltr-20">
         <div class="card-box mb-30">
-          <h2 class="h4 pd-20">Delete Customer</h2>
+          <h2 class="h4 pd-20">Delete Order</h2>
           <form method="POST">
             <table class="table table-bordered">
               <tr>
-                <td>Name</td>
-                <td><%=customersInfo[0].name%></td>
+                <td>Order Id</td>
+                <td><%=orderInfo[0].id%></td>
               </tr>
               <tr>
-                <td>Email</td>
-                <td><%=customersInfo[0].email%></td>
+                <td>Quantity</td>
+                <td><%=orderInfo[0].quantity%></td>
               </tr>
               <tr>
-                <td>Phone</td>
-                <td><%=customersInfo[0].phone%></td>
+                <td>Order Date</td>
+                <td><%=orderInfo[0].order_date%></td>
               </tr>
               <tr>
-                <td>Address</td>
-                <td><%=customersInfo[0].address%></td>
-              </tr>
-              <tr>
-                <td>Registration Date</td>
-                <td><%=customersInfo[0].registration_date%></td>
+                <td>Status</td>
+                <td><%=orderInfo[0].status%></td>
               </tr>
             </table>
             <div class="col-sm-12 col-md-2" style="text-align: center">
