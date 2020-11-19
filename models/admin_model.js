@@ -151,4 +151,124 @@ module.exports = {
       callback(status);
     });
   },
+
+  // All Category
+
+  getAllCategory: function (user, callback) {
+    var sql = "select * from category WHERE store='" + user.email + "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+
+  // get All Sub Category
+  getAllSubCategory: function (user, callback) {
+    var sql =
+      "SELECT category.category_name AS categoryname, subcategory.sub_category_name AS subcategoryname, subcategory.creation_date AS creationdate, subcategory.update_date AS updatedate, subcategory.id AS subcategoryid FROM category JOIN subcategory ON category.id = subcategory.category_id WHERE subcategory.store='" +
+      user.email +
+      "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+
+  insertCategory: function (user, callback) {
+    var sql =
+      "INSERT INTO category (category_name, category_description, creation_date, store) VALUES ('" +
+      user.category_name +
+      "' , '" +
+      user.drescription +
+      "' , '" +
+      user.creation_date +
+      "', '" +
+      user.store +
+      "')";
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
+  insertSubCategory: function (user, callback) {
+    var sql =
+      "INSERT INTO subcategory (category_id, sub_category_name, creation_date, store) VALUES ('" +
+      user.category +
+      "' , '" +
+      user.sub_category +
+      "' , '" +
+      user.creation_date +
+      "', '" +
+      user.store +
+      "')";
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
+  getCategoryById: function (user, callback) {
+    var sql =
+      "select * from category WHERE store='" +
+      user.email +
+      "' AND id='" +
+      user.id +
+      "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+
+  updateCategory: function (user, callback) {
+    sql =
+      "UPDATE category SET category_name='" +
+      user.category_name +
+      "',category_description='" +
+      user.category_drescription +
+      "',update_date='" +
+      user.last_update +
+      "' WHERE id='" +
+      user.id +
+      "'";
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
+
+  deleteCategory: function (user, callback) {
+    sql = "DELETE FROM category WHERE id='" + user.id + "'";
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
+
+  getSubCategoryById: function (user, callback) {
+    var sql =
+      "SELECT category.category_name AS categoryname, subcategory.sub_category_name AS subcategoryname, subcategory.creation_date AS creationdate, subcategory.update_date AS updatedate FROM category JOIN subcategory ON category.id = subcategory.category_id WHERE subcategory.store='" +
+      user.email +
+      "' AND subcategory.id='" +
+      user.id +
+      "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+
+  updateSubCategory: function (user, callback) {
+    sql =
+      "UPDATE subcategory SET category_id='" +
+      user.category +
+      "',sub_category_name='" +
+      user.sub_category_name +
+      "',update_date='" +
+      user.last_update +
+      "' WHERE id='" +
+      user.id +
+      "'";
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
+
+  deleteSubCategory: function (user, callback) {
+    sql = "DELETE FROM subcategory WHERE id='" + user.id + "'";
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
 };

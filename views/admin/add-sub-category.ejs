@@ -9,19 +9,19 @@
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="vendors/images/apple-touch-icon.png"
+      href="/abc/images/apple-touch-icon.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="vendors/images/favicon-32x32.png"
+      href="/abc/images/favicon-32x32.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="vendors/images/favicon-16x16.png"
+      href="/abc/images/favicon-16x16.png"
     />
 
     <!-- Mobile Specific Metas -->
@@ -36,23 +36,23 @@
       rel="stylesheet"
     />
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="vendors/styles/core.css" />
+    <link rel="stylesheet" type="text/css" href="/abc/styles/core.css" />
     <link
       rel="stylesheet"
       type="text/css"
-      href="vendors/styles/icon-font.min.css"
+      href="/abc/styles/icon-font.min.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+      href="/abc/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="src/plugins/datatables/css/responsive.bootstrap4.min.css"
+      href="/abc/src/plugins/datatables/css/responsive.bootstrap4.min.css"
     />
-    <link rel="stylesheet" type="text/css" href="vendors/styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="/abc/styles/style.css" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
@@ -75,18 +75,20 @@
               data-toggle="dropdown"
             >
               <span class="user-icon">
-                <img src="vendors/images/photo1.jpg" alt="" />
+                <img src="/abc/images/photo1.jpg" alt="" />
               </span>
               <!-- Profile name -->
-              <span class="user-name" style="color: #ffff">Sakil Khan</span>
+              <span class="user-name" style="color: #ffff"
+                ><%=admininfo[0].username %>
+              </span>
             </a>
             <div
               class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
             >
-              <a class="dropdown-item" href="admin-chnage-password.html"
+              <a class="dropdown-item" href="/admin/chnage_password"
                 ><i class="dw dw-settings2"></i>Change Password</a
               >
-              <a class="dropdown-item" href="login.html"
+              <a class="dropdown-item" href="/logout"
                 ><i class="dw dw-logout"></i> Log Out</a
               >
             </div>
@@ -97,7 +99,7 @@
     <!-- Store Name -->
     <div class="left-side-bar">
       <div class="brand-logo">
-        <a href="index.html">Sakil's Store </a>
+        <a href="/admin"><%=admininfo[0].store_name %> </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
           <i class="ion-close-round"></i>
         </div>
@@ -106,7 +108,7 @@
         <div class="sidebar-menu">
           <ul id="accordion-menu">
             <li class="dropdown">
-              <a href="index.html" class="dropdown-toggle no-arrow">
+              <a href="/admin" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-house-1"></span
                 ><span class="mtext">Dashboard</span>
               </a>
@@ -132,12 +134,12 @@
                 ><span class="mtext">Orders</span>
               </a>
               <ul class="submenu">
-                <li><a href="all-orders.html">All Orders</a></li>
-                <li><a href="pending-orders.html">Peding Orders</a></li>
+                <li><a href="/admin/all_orders">All Orders</a></li>
+                <li><a href="/admin/pending_orders">Peding Orders</a></li>
                 <li>
                   <a href="/admin/in_process_orders">In Process Orders</a>
                 </li>
-                <li><a href="delivered-orders.html">Delivered Orders</a></li>
+                <li><a href="/admin/delivered_orders">Delivered Orders</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -146,16 +148,17 @@
                 ><span class="mtext"> Categories </span>
               </a>
               <ul class="submenu">
-                <li><a href="all-categories.html">All Categories </a></li>
+                <li><a href="/admin/all_categories">All Categories </a></li>
                 <li>
-                  <a href="all-sub-categories.html">All Sub-Categories</a>
+                  <a href="/admin/all_sub_categories">All Sub-Categories</a>
                 </li>
-                <li><a href="add-category.html">Add Category</a></li>
-                <li><a href="add-sub-category.html">Add Sub-Category</a></li>
-                <li><a href="manage-category.html">Manage Category</a></li>
+                <li><a href="/admin/add_category">Add Category</a></li>
+                <li><a href="/admin/add_sub_category">Add Sub-Category</a></li>
+
+                <!-- <li><a href="manage-category.html">Manage Category</a></li>
                 <li>
                   <a href="manage-sub-category.html">Manage Sub-Category</a>
-                </li>
+                </li> -->
               </ul>
             </li>
             <li class="dropdown">
@@ -164,9 +167,9 @@
                 ><span class="mtext">Customers</span>
               </a>
               <ul class="submenu">
-                <li><a href="all-customers.html">All Customers</a></li>
-                <li><a href="add-new-customer.html">Add New Customer</a></li>
-                <li><a href="manage-customer.html">Manage Customer</a></li>
+                <li><a href="/admin/all_customers">All Customers</a></li>
+                <li><a href="/admin/add_new_customer">Add New Customer</a></li>
+                <li><a href="/admin/manage_customer">Manage Customer</a></li>
               </ul>
             </li>
           </ul>
@@ -179,19 +182,22 @@
     <div class="main-container">
       <div class="pd-ltr-20">
         <div class="card-box mb-30">
-          <h2 class="h4 pd-20">Edit Sub-Category</h2>
+          <h2 class="h4 pd-20">Add Sub-Category</h2>
           <div class="pd-20 card-box mb-30">
-            <form>
+            <form method="POST">
               <!-- Category Name-->
               <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label"
                   >Select Category</label
                 >
                 <div class="col-sm-12 col-md-10">
-                  <select class="custom-select form-control">
+                  <select name="category" class="custom-select form-control">
                     <option value="">---Select Category---</option>
-                    <option value="Electronics" selected>Electronics</option>
-                    <option value="Book">Book</option>
+                    <% for(var i=0; i< category.length; i++ ){%>
+                    <option value="<%=category[i].id %>">
+                      <%=category[i].category_name %>
+                    </option>
+                    <% } %>
                   </select>
                 </div>
               </div>
@@ -199,37 +205,23 @@
                 <label class="col-sm-12 col-md-2 col-form-label"
                   >Sub-Category Name</label
                 >
-
                 <div class="col-sm-12 col-md-10">
                   <input
                     type="text"
-                    name="product-details"
+                    name="sub_category"
                     class="form-control"
-                    value="Phone"
+                    placeholder="Sub-Category Name.."
+                    required
                   />
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label"
-                  >Creation Date</label
-                >
 
-                <div class="col-sm-12 col-md-10">
-                  <input
-                    type="text"
-                    name="product-details"
-                    class="form-control"
-                    value="17/11/2020"
-                  />
-                </div>
-              </div>
               <div class="col-sm-12 col-md-2" style="text-align: center">
                 <input
                   class="btn btn-primary"
                   type="submit"
                   name="submit"
-                  id=""
-                  value="Edit Sub-Category"
+                  value="Add Sub-Category"
                 />
               </div>
             </form>
@@ -240,15 +232,15 @@
     <!-- End Main Container -->
 
     <!-- js -->
-    <script src="vendors/scripts/core.js"></script>
-    <script src="vendors/scripts/script.min.js"></script>
-    <script src="vendors/scripts/process.js"></script>
-    <script src="vendors/scripts/layout-settings.js"></script>
-    <script src="src/plugins/apexcharts/apexcharts.min.js"></script>
-    <script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-    <script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-    <script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-    <script src="vendors/scripts/dashboard.js"></script>
+    <script src="/abc/scripts/core.js"></script>
+    <script src="/abc/scripts/script.min.js"></script>
+    <script src="/abc/scripts/process.js"></script>
+    <script src="/abc/scripts/layout-settings.js"></script>
+    <script src="/abc/src/plugins/apexcharts/apexcharts.min.js"></script>
+    <script src="/abc/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/abc/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/abc/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+    <script src="/abc/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+    <script src="/abc/scripts/dashboard.js"></script>
   </body>
 </html>
