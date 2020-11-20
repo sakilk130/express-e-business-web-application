@@ -688,26 +688,26 @@ router.get('/manage_product', (req, res) => {
 });
 
 // Add New Product--GET
-// router.get('/add_new_product', (req, res) => {
-//   if (req.cookies['uname'] != null) {
-//     var category = {
-//       email: req.cookies['uname'],
-//     };
-//     admin_model.getByEmail(category, function (results) {
-//       admin_model.getAllCategory(category, function (results2) {
-//         admin_model.getAllSubCategoryP(category, function (results3) {
-//           res.render('admin/add-new-product', {
-//             admininfo: results,
-//             category: results2,
-//             subcategory: results3,
-//           });
-//         });
-//       });
-//     });
-//   } else {
-//     res.redirect('/');
-//   }
-// });
+router.get('/add_new_product', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var category = {
+      email: req.cookies['uname'],
+    };
+    admin_model.getByEmail(category, function (results) {
+      admin_model.getAllCategory(category, function (results2) {
+        admin_model.getAllSubCategoryP(category, function (results3) {
+          res.render('admin/add-new-product', {
+            admininfo: results,
+            category: results2,
+            subcategory: results3,
+          });
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
 
 // Edit Products--Get
 router.get('/edit_product/:id', (req, res) => {

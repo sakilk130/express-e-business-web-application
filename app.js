@@ -3,11 +3,12 @@ const bodyParser = require('body-parser');
 const exSession = require('express-session');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
-var uuid = require('uuid');
 const path = require('path');
 const login = require('./controller/login');
 const admin = require('./controller/admin');
 const logout = require('./controller/logout');
+const home = require('./controller/home');
+
 const app = express();
 
 //config
@@ -25,7 +26,8 @@ app.use(
 );
 app.use(fileUpload());
 app.use(cookieParser());
-app.use('/', login);
+app.use('/', home);
+app.use('/login', login);
 app.use('/admin', admin);
 app.use('/logout', logout);
 
@@ -34,7 +36,7 @@ app.use('/logout', logout);
 //route
 
 app.get('*', (req, res) => {
-  res.send('404 not found');
+  res.render('admin/404');
 });
 
 const PORT = process.env.PORT || 3000;
