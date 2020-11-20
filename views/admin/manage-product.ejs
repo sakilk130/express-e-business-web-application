@@ -88,7 +88,7 @@
               <a class="dropdown-item" href="/admin/change_password"
                 ><i class="dw dw-settings2"></i>Change Password</a
               >
-              <a class="dropdown-item" href="/login"
+              <a class="dropdown-item" href="/logout"
                 ><i class="dw dw-logout"></i> Log Out</a
               >
             </div>
@@ -119,12 +119,12 @@
                 ><span class="mtext">Products</span>
               </a>
               <ul class="submenu">
-                <li><a href="all-products.html">All Products</a></li>
+                <li><a href="/admin/all_products">All Products</a></li>
                 <li>
-                  <a href="add-new-product.html">Add New Product</a>
+                  <a href="/admin/add_new_product">Add New Product</a>
                 </li>
                 <li>
-                  <a href="action-product.html">Manage Products</a>
+                  <a href="/admin/manage_product">Manage Products</a>
                 </li>
               </ul>
             </li>
@@ -178,70 +178,73 @@
     <div class="mobile-menu-overlay"></div>
 
     <!-- Main Container -->
+
     <div class="main-container">
       <div class="pd-ltr-20">
         <div class="card-box mb-30">
-          <h2 class="h4 pd-20">Edit Category</h2>
-          <div class="pd-20 card-box mb-30">
-            <form method="POST">
-              <!-- Category Name-->
-              <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label"
-                  >Category Name</label
-                >
-                <div class="col-sm-12 col-md-10">
-                  <input
-                    class="form-control"
-                    type="text"
-                    name="category_name"
-                    value="<%=category[0].category_name  %> "
-                    required
-                  />
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label"
-                  >Drescription</label
-                >
-
-                <div class="col-sm-12 col-md-10">
-                  <textarea
-                    type="text"
-                    name="category_drescription"
-                    class="form-control"
-                    cols="30"
-                    rows="10"
-                    required
+          <h2 class="h4 pd-20">Manage Products</h2>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>S.N</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Sub-Category</th>
+                <th>Brand</th>
+                <th>In Stock</th>
+                <th>Price</th>
+                <th>Creation Date</th>
+                <th>Last Update</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i=0; i< products.length; i++ ){ %>
+              <tr>
+                <td class="table-plus"><%= i+1 %></td>
+                <td>img</td>
+                <td><%=products[i].productname %></td>
+                <td><%=products[i].categoryname %></td>
+                <td><%=products[i].subcategoryname %></td>
+                <td><%=products[i].productbrand %></td>
+                <td><%=products[i].instock %></td>
+                <td><%=products[i].productprice %></td>
+                <td><%=products[i].creationdate %></td>
+                <td><%=products[i].lastupdate %></td>
+                <td>
+                  <a
+                    href="/admin/edit_product/<%= products[i].productid %>"
+                    class="micon dw dw-edit-1"
+                    >Edit
+                  </a>
+                  |
+                  <a
+                    href="/admin/delete_product/<%=  products[i].productid %>"
+                    class="micon dw dw-delete-3"
                   >
-                    <%=category[0].category_description  %>
-                  </textarea>
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-2" style="text-align: center">
-                <input
-                  class="btn btn-primary"
-                  type="submit"
-                  name="submit"
-                  value="Edit Category"
-                />
-              </div>
-            </form>
-          </div>
+                    Delete</a
+                  >
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
     <!-- End Main Container -->
 
     <!-- js -->
-    <script src="vendors/scripts/core.js"></script>
-    <script src="vendors/scripts/script.min.js"></script>
-    <script src="vendors/scripts/process.js"></script>
-    <script src="vendors/scripts/layout-settings.js"></script>
-    <script src="src/plugins/apexcharts/apexcharts.min.js"></script>
-    <script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-    <script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-    <script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-    <script src="vendors/scripts/dashboard.js"></script>
+    <script src="/abc/scripts/core.js"></script>
+    <script src="/abc/scripts/script.min.js"></script>
+    <script src="/abc/scripts/process.js"></script>
+    <script src="/abc/scripts/layout-settings.js"></script>
+    <script src="/abc/src/plugins/apexcharts/apexcharts.min.js"></script>
+    <script src="/abc/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/abc/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/abc/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+    <script src="/abc/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+    <script src="/abc/scripts/dashboard.js"></script>
   </body>
 </html>

@@ -281,4 +281,103 @@ module.exports = {
       callback(status);
     });
   },
+  getAllSubCategoryP: function (user, callback) {
+    sql = "SELECT * FROM subcategory WHERE store='" + user.email + "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+
+  // insertProduct: function (user, callback) {
+  //   var sql =
+  //     "INSERT INTO products (category_ID, sub_category_ID, product_name, product_brand, product_price, product_discount, product_description, product_image, shipping_cost,product_availability, in_stock, creation_date, store) VALUES ('" +
+  //     user.category +
+  //     "' , '" +
+  //     user.sub_category +
+  //     "' , '" +
+  //     user.product_name +
+  //     "', '" +
+  //     user.product_brand +
+  //     "', '" +
+  //     user.price +
+  //     "', '" +
+  //     user.product_discount +
+  //     "', '" +
+  //     user.product_description +
+  //     "', '" +
+  //     user.uploaded_image.name +
+  //     "', '" +
+  //     user.shipping_charge +
+  //     "', '" +
+  //     user.product_availability +
+  //     "', '" +
+  //     user.product_stock +
+  //     "', '" +
+  //     user.last_update +
+  //     "', '" +
+  //     user.email +
+  //     "')";
+  //   db.execute(sql, function (status) {
+  //     callback(status);
+  //   });
+  // },
+
+  getAllProducts: function (user, callback) {
+    var sql =
+      "SELECT products.product_name AS productname, products.product_brand AS productbrand, products.product_availability AS productavailability, products.in_stock AS instock, products.product_price AS productprice, products.creation_date AS creationdate ,  products.last_update AS lastupdate,  products.id AS productid ,category.category_name AS categoryname, subcategory.sub_category_name AS subcategoryname FROM products JOIN category ON products.category_ID = category.id JOIN subcategory ON products.sub_category_ID = subcategory.id WHERE products.store='" +
+      user.email +
+      "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+  getProductsById: function (user, callback) {
+    var sql =
+      "SELECT products.product_name AS productname, products.product_brand AS productbrand,products.shipping_cost AS shippingcost,products.product_description AS productdescription, products.product_availability AS productavailability, products.in_stock AS instock, products.product_price AS productprice, products.creation_date AS creationdate ,  products.last_update AS lastupdate,  products.id AS productid ,category.category_name AS categoryname, subcategory.sub_category_name AS subcategoryname FROM products JOIN category ON products.category_ID = category.id JOIN subcategory ON products.sub_category_ID = subcategory.id WHERE products.store='" +
+      user.email +
+      "' AND products.id='" +
+      user.id +
+      "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+  updateProducts: function (user, callback) {
+    sql =
+      "UPDATE products SET category_ID='" +
+      user.category +
+      "',sub_category_ID='" +
+      user.sub_category +
+      "',product_name='" +
+      user.product_name +
+      "',product_brand='" +
+      user.product_brand +
+      "',product_price='" +
+      user.price +
+      "',product_description='" +
+      user.product_description +
+      "',shipping_cost='" +
+      user.shipping_charge +
+      "',product_availability='" +
+      user.product_availability +
+      "',in_stock='" +
+      user.product_stock +
+      "',last_update='" +
+      user.last_update +
+      "',product_image='" +
+      user.product_image +
+      "' WHERE id='" +
+      user.id +
+      "'";
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
+
+  deleteProduct: function (user, callback) {
+    sql = "DELETE FROM products WHERE id='" + user.id + "'";
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
 };

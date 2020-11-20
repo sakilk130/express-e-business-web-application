@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const admin_model = require.main.require('./models/admin_model');
-
+var mysql = require('mysql');
 // Admin Index Page Render
 router.get('/', (req, res) => {
   if (req.cookies['uname'] != null) {
@@ -511,7 +511,7 @@ router.get('/edit_category/:id', (req, res) => {
       email: req.cookies['uname'],
       id: req.params.id,
     };
-    admin_model.getSubCategoryById(admininfo, function (results) {
+    admin_model.getCategoryById(admininfo, function (results) {
       admin_model.getByEmail(admininfo, function (results2) {
         res.render('admin/edit-category', {
           category: results,
@@ -649,5 +649,154 @@ router.post('/delete_sub_category/:id', (req, res) => {
     }
   });
 });
+// All all_products
+router.get('/all_products', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var allproduct = {
+      email: req.cookies['uname'],
+    };
+    admin_model.getByEmail(allproduct, function (results) {
+      admin_model.getAllProducts(allproduct, function (results2) {
+        res.render('admin/all-products', {
+          admininfo: results,
+          products: results2,
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
 
+// Manage  all_products
+router.get('/manage_product', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var allproduct = {
+      email: req.cookies['uname'],
+    };
+    admin_model.getByEmail(allproduct, function (results) {
+      admin_model.getAllProducts(allproduct, function (results2) {
+        res.render('admin/manage-product', {
+          admininfo: results,
+          products: results2,
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+// Add New Product--GET
+// router.get('/add_new_product', (req, res) => {
+//   if (req.cookies['uname'] != null) {
+//     var category = {
+//       email: req.cookies['uname'],
+//     };
+//     admin_model.getByEmail(category, function (results) {
+//       admin_model.getAllCategory(category, function (results2) {
+//         admin_model.getAllSubCategoryP(category, function (results3) {
+//           res.render('admin/add-new-product', {
+//             admininfo: results,
+//             category: results2,
+//             subcategory: results3,
+//           });
+//         });
+//       });
+//     });
+//   } else {
+//     res.redirect('/');
+//   }
+// });
+
+// Edit Products--Get
+router.get('/edit_product/:id', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var admininfo = {
+      email: req.cookies['uname'],
+      id: req.params.id,
+    };
+    admin_model.getAllSubCategoryP(admininfo, function (results) {
+      admin_model.getByEmail(admininfo, function (results2) {
+        admin_model.getAllCategory(admininfo, function (results3) {
+          admin_model.getProductsById(admininfo, function (results4) {
+            res.render('admin/edit-product', {
+              subcategory: results,
+              admininfo: results2,
+              allcategory: results3,
+              product: results4,
+            });
+          });
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+// Edit Products--POST
+router.post('/edit_product/:id', (req, res) => {
+  var category = {
+    email: req.cookies['uname'],
+    last_update: new Date().toLocaleDateString(),
+    id: req.params.id,
+    category: req.body.category,
+    sub_category: req.body.sub_category,
+    product_name: req.body.product_name,
+    product_brand: req.body.product_brand,
+    product_description: req.body.product_description,
+    shipping_charge: req.body.shipping_charge,
+    product_availability: req.body.product_availability,
+    product_stock: req.body.product_stock,
+    price: req.body.price,
+    product_image: 'image',
+  };
+  admin_model.updateProducts(category, function (status) {
+    if (status) {
+      res.redirect('/admin/manage_product');
+    } else {
+      res.send('Not Update');
+    }
+  });
+});
+
+// Delete Product-->GET
+router.get('/delete_product/:id', (req, res) => {
+  if (req.cookies['uname'] != null) {
+    var admininfo = {
+      email: req.cookies['uname'],
+      id: req.params.id,
+    };
+    admin_model.getAllSubCategoryP(admininfo, function (results) {
+      admin_model.getByEmail(admininfo, function (results2) {
+        admin_model.getAllCategory(admininfo, function (results3) {
+          admin_model.getProductsById(admininfo, function (results4) {
+            res.render('admin/delete-product', {
+              subcategory: results,
+              admininfo: results2,
+              allcategory: results3,
+              product: results4,
+            });
+          });
+        });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+// Delete Product--POST
+router.post('/delete_product/:id', (req, res) => {
+  var category = {
+    id: req.params.id,
+  };
+  admin_model.deleteProduct(category, function (status) {
+    if (status) {
+      res.redirect('/admin/manage_product');
+    } else {
+      res.send('Delete failed');
+    }
+  });
+});
 module.exports = router;
