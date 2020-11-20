@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
     var admininfo = {
       email: req.cookies['uname'],
     };
-
     admin_model.getByEmail(admininfo, function (results) {
       res.render('admin/index', { admininfo: results });
     });
@@ -20,12 +19,40 @@ router.get('/', (req, res) => {
 // Change Password Page Render
 router.get('/change_password', (req, res) => {
   if (req.cookies['uname'] != null) {
-    res.render('admin/admin-chnage-password');
+    var admininfo = {
+      email: req.cookies['uname'],
+    };
+    admin_model.getByEmail(admininfo, function (results) {
+      res.render('admin/admin-chnage-password', { admininfo: results });
+    });
   } else {
     res.redirect('/');
   }
 });
 
+// Change Password --POST
+router.post('/change_password', (req, res) => {
+  var admininfo = {
+    old_password: req.body.old_password,
+    email: req.cookies['uname'],
+    new_password: req.body.new_password,
+    c_new_password: req.body.c_new_password,
+    registration_date: new Date().toLocaleDateString(),
+  };
+  admin_model.getByEmail(admininfo, function (results) {
+    if (admininfo.old_password === results[0].password) {
+      if (admininfo.new_password === admininfo.c_new_password) {
+        admin_model.updateAdminPass(admininfo, function (status) {
+          res.redirect('/admin');
+        });
+      } else {
+        res.send('Not Update');
+      }
+    } else {
+      res.send('Password Not Match');
+    }
+  });
+});
 // View All Customers Page Render
 router.get('/all_customers', (req, res) => {
   if (req.cookies['uname'] != null) {

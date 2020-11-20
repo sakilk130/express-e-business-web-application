@@ -29,7 +29,17 @@ module.exports = {
       callback(results);
     });
   },
-
+  updateAdminPass: function (user, callback) {
+    sql =
+      "UPDATE user SET password='" +
+      user.c_new_password +
+      "'WHERE email='" +
+      user.email +
+      "'";
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
   getAllCustomers: function (user, callback) {
     var sql = "select * from customers WHERE store='" + user.email + "'";
     db.getResults(sql, function (results) {
