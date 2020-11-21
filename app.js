@@ -8,7 +8,7 @@ const login = require('./controller/login');
 const admin = require('./controller/admin');
 const logout = require('./controller/logout');
 const home = require('./controller/home');
-
+const register = require('./controller/register');
 const app = express();
 
 //config
@@ -27,6 +27,7 @@ app.use(
 app.use(fileUpload());
 app.use(cookieParser());
 app.use('/', home);
+app.use('/register', register);
 app.use('/login', login);
 app.use('/admin', admin);
 app.use('/logout', logout);

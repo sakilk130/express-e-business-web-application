@@ -380,4 +380,26 @@ module.exports = {
       callback(status);
     });
   },
+
+  register: function (user, callback) {
+    var sql =
+      "INSERT INTO user (username, password, email, phone, address, type, store_name) VALUES ('" +
+      user.username +
+      "' , '" +
+      user.password +
+      "' , '" +
+      user.email +
+      "', '" +
+      user.phone +
+      "', '" +
+      user.address +
+      "', '" +
+      user.type +
+      "', '" +
+      user.store_name +
+      "')";
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
 };
