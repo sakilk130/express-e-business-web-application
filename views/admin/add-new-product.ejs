@@ -185,18 +185,14 @@
         <div class="card-box mb-30">
           <h2 class="h4 pd-20">Add Product</h2>
           <div class="pd-20 card-box mb-30">
-            <form method="POST">
+            <form method="POST" role="form" enctype="multipart/form-data">
               <!-- Select Category -->
               <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label"
                   >Select Category</label
                 >
                 <div class="col-sm-12 col-md-10">
-                  <select
-                    name="category"
-                    class="custom-select form-control"
-                    required
-                  >
+                  <select name="category" class="custom-select form-control">
                     <!-- render from database -->
                     <option value="">---Select Category---</option>
                     <% for(var i=0; i< category.length; i++ ){%>
@@ -216,7 +212,6 @@
                   <select
                     name="sub_category"
                     class="custom-select form-control"
-                    required
                   >
                     <!-- render from database -->
                     <option value="">---Select Sub-Category---</option>
@@ -239,7 +234,6 @@
                     type="text"
                     name="product_name"
                     placeholder="MacBook Pro 16GB 2021.."
-                    required
                   />
                 </div>
               </div>
@@ -255,7 +249,6 @@
                     type="text"
                     name="product_brand"
                     placeholder="Apple"
-                    required
                   />
                 </div>
               </div>
@@ -271,7 +264,6 @@
                     cols="30"
                     rows="10"
                     placeholder="Product Description....."
-                    required
                   ></textarea>
                 </div>
               </div>
@@ -287,7 +279,6 @@
                     type="text"
                     name="shipping_charge"
                     placeholder="100 BDT"
-                    required
                   />
                 </div>
               </div>
@@ -301,7 +292,6 @@
                   <select
                     name="product_availability"
                     class="custom-select form-control"
-                    required
                   >
                     <option value="In Stock">In Stock</option>
                     <option value="Out Of Stock">Out Of Stock</option>
@@ -319,7 +309,6 @@
                     type="text"
                     name="product_stock"
                     placeholder="200"
-                    required
                   />
                 </div>
               </div>
@@ -333,7 +322,6 @@
                     type="text"
                     name="price"
                     placeholder="2,20,000 BDT"
-                    required
                   />
                 </div>
               </div>
@@ -358,9 +346,10 @@
                 >
                 <div class="col-sm-12 col-md-10">
                   <input
+                    name="image"
                     class="form-control"
                     type="file"
-                    name="uploaded_image"
+                    accept=""
                   />
                 </div>
               </div>

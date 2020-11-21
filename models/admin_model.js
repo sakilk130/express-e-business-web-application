@@ -22,6 +22,13 @@ module.exports = {
       callback(results);
     });
   },
+  countAllCustomer: function (user, callback) {
+    // var sql = "SELECT COUNT(*) FROM customers WHERE store='" + user.email + "'";
+    var sql = "SELECT * FROM customers WHERE store='" + user.email + "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
 
   getByEmail: function (user, callback) {
     var sql = "SELECT * FROM user WHERE email='" + user.email + "'";
@@ -29,6 +36,7 @@ module.exports = {
       callback(results);
     });
   },
+
   updateAdminPass: function (user, callback) {
     sql =
       "UPDATE user SET password='" +
@@ -331,6 +339,7 @@ module.exports = {
       callback(results);
     });
   },
+
   getProductsById: function (user, callback) {
     var sql =
       "SELECT products.product_name AS productname, products.product_brand AS productbrand,products.shipping_cost AS shippingcost,products.product_description AS productdescription, products.product_availability AS productavailability, products.in_stock AS instock, products.product_price AS productprice, products.creation_date AS creationdate ,  products.last_update AS lastupdate,  products.id AS productid ,category.category_name AS categoryname, subcategory.sub_category_name AS subcategoryname FROM products JOIN category ON products.category_ID = category.id JOIN subcategory ON products.sub_category_ID = subcategory.id WHERE products.store='" +

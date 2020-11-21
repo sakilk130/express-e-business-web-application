@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const admin_model = require.main.require('./models/admin_model');
 var mysql = require('mysql');
+
 // Admin Index Page Render
 router.get('/', (req, res) => {
   if (req.cookies['uname'] != null) {
@@ -9,7 +10,13 @@ router.get('/', (req, res) => {
       email: req.cookies['uname'],
     };
     admin_model.getByEmail(admininfo, function (results) {
-      res.render('admin/index', { admininfo: results });
+      admin_model.countAllCustomer(admininfo, function (results2) {
+        console.log(results2);
+        res.render('admin/index', {
+          admininfo: results,
+          countAllCustomer: results2,
+        });
+      });
     });
   } else {
     res.redirect('/');
@@ -709,6 +716,12 @@ router.get('/add_new_product', (req, res) => {
   }
 });
 
+// Add new product -->POST
+
+router.post('/add_new_product', (req, res) => {
+  console.log(req);
+});
+
 // Edit Products--Get
 router.get('/edit_product/:id', (req, res) => {
   if (req.cookies['uname'] != null) {
@@ -799,4 +812,5 @@ router.post('/delete_product/:id', (req, res) => {
     }
   });
 });
+
 module.exports = router;

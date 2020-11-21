@@ -3,7 +3,7 @@
   <head>
     <!-- Basic Page Info -->
     <meta charset="utf-8" />
-    <title>Shop Name</title>
+    <title><%= admininfo[0].store_name %></title>
 
     <!-- Site favicon -->
     <link
@@ -66,6 +66,15 @@
         <div class="menu-icon dw dw-menu"></div>
       </div>
       <div class="header-right">
+        <div class="user-notification">
+          <a style="color: white; height: 10px; width: 10px" href="/store">
+            <i
+              style="height: 10px; width: 10px"
+              class="icon-copy dw dw-worldwide-1"
+            ></i>
+            Go To Store
+          </a>
+        </div>
         <div class="user-info-dropdown">
           <div class="dropdown">
             <a
@@ -120,12 +129,12 @@
                 ><span class="mtext">Products</span>
               </a>
               <ul class="submenu">
-                <li><a href="all-products.html">All Products</a></li>
+                <li><a href="/admin/all_products">All Products</a></li>
                 <li>
-                  <a href="add-new-product.html">Add New Product</a>
+                  <a href="/admin/add_new_product">Add New Product</a>
                 </li>
                 <li>
-                  <a href="manage-product.html">Manage Products</a>
+                  <a href="/admin/manage_product">Manage Products</a>
                 </li>
               </ul>
             </li>
@@ -226,7 +235,7 @@
                   </div>
                 </div>
                 <div class="widget-data">
-                  <div class="h4 mb-0">Total Orders</div>
+                  <div class="h4 mb-0">Pending Orders</div>
                   <div class="weight-600 font-14">500 products</div>
                 </div>
               </div>
@@ -256,7 +265,9 @@
                 </div>
                 <div class="widget-data">
                   <div class="h4 mb-0">Total Users</div>
-                  <div class="weight-600 font-14">2,000 users</div>
+                  <div class="weight-600 font-14">
+                    <%=countAllCustomer.length %> Users
+                  </div>
                 </div>
               </div>
             </div>

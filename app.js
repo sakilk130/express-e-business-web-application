@@ -16,6 +16,8 @@ app.set('view engine', 'ejs');
 //
 // middleware
 app.use('/abc', express.static(path.join(__dirname, 'assets')));
+
+app.use(fileUpload());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   exSession({
@@ -31,7 +33,6 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/admin', admin);
 app.use('/logout', logout);
-
 // app.use('/user', user);
 
 //route
