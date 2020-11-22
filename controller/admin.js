@@ -2,19 +2,30 @@ const express = require('express');
 const router = express.Router();
 const admin_model = require.main.require('./models/admin_model');
 var mysql = require('mysql');
+const path = require('path');
 
 // Admin Index Page Render
 router.get('/', (req, res) => {
   if (req.cookies['uname'] != null) {
     var admininfo = {
       email: req.cookies['uname'],
+      status: 'Pending',
     };
     admin_model.getByEmail(admininfo, function (results) {
       admin_model.countAllCustomer(admininfo, function (results2) {
-        console.log(results2);
-        res.render('admin/index', {
-          admininfo: results,
-          countAllCustomer: results2,
+        admin_model.getallPendingOrder(admininfo, function (results3) {
+          admin_model.getAllProductsCount(admininfo, function (results4) {
+            admin_model.getPendingOrder(admininfo, function (results5) {
+              console.log(results2);
+              res.render('admin/index', {
+                admininfo: results,
+                countAllCustomer: results2,
+                pendingOrder: results3,
+                productsCount: results4,
+                orders: results5,
+              });
+            });
+          });
         });
       });
     });
@@ -719,7 +730,42 @@ router.get('/add_new_product', (req, res) => {
 // Add new product -->POST
 
 router.post('/add_new_product', (req, res) => {
-  console.log(req);
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send('No files were uploaded.');
+  }
+  console.log('image data', req.files.image);
+
+  const imageFile = req.files.image;
+
+  imageFile.mv(
+    path.join(__dirname, '../assets/uploads', imageFile.name),
+    (res) => console.log('file save successful', res)
+  );
+  // res.json({
+  //   success: true,
+  // });
+  var products = {
+    category: req.body.category,
+    sub_category: req.body.sub_category,
+    product_name: req.body.product_name,
+    product_brand: req.body.product_brand,
+    product_description: req.body.product_description,
+    shipping_charge: req.body.shipping_charge,
+    product_availability: req.body.product_availability,
+    product_stock: req.body.product_stock,
+    price: req.body.price,
+    product_discount: req.body.product_discount,
+    image: imageFile.name,
+    email: req.cookies['uname'],
+    last_update: new Date().toLocaleDateString(),
+  };
+  admin_model.insertProduct(products, function (status) {
+    if (status) {
+      res.redirect('/admin/all_products');
+    } else {
+      res.send('failed');
+    }
+  });
 });
 
 // Edit Products--Get

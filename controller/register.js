@@ -21,9 +21,14 @@ router.post('/', (req, res) => {
   admin_model.register(user, function (status) {
     console.log(user);
     if (status) {
-      res.render('admin/login');
+      res.send(
+        '<script>alert("Registration Successful"); window.location.href ="/login"; </script>'
+      );
+      // res.render('admin/login');
     } else {
-      res.send('Not Register');
+      res.send(
+        '<script>alert("Registration Successful"); window.location.href ="/register";</script>'
+      );
     }
   });
 });

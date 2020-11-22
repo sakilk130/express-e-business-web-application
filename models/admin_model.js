@@ -126,6 +126,24 @@ module.exports = {
       callback(results);
     });
   },
+  getallPendingOrder: function (user, callback) {
+    var sql =
+      "SELECT * FROM orders WHERE store='" +
+      user.email +
+      "' AND status='" +
+      'Pending' +
+      "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+
+  getAllProductsCount: function (user, callback) {
+    var sql = "SELECT * FROM products WHERE store='" + user.email + "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
 
   getPendingOrderById: function (user, callback) {
     var sql =
@@ -296,43 +314,43 @@ module.exports = {
     });
   },
 
-  // insertProduct: function (user, callback) {
-  //   var sql =
-  //     "INSERT INTO products (category_ID, sub_category_ID, product_name, product_brand, product_price, product_discount, product_description, product_image, shipping_cost,product_availability, in_stock, creation_date, store) VALUES ('" +
-  //     user.category +
-  //     "' , '" +
-  //     user.sub_category +
-  //     "' , '" +
-  //     user.product_name +
-  //     "', '" +
-  //     user.product_brand +
-  //     "', '" +
-  //     user.price +
-  //     "', '" +
-  //     user.product_discount +
-  //     "', '" +
-  //     user.product_description +
-  //     "', '" +
-  //     user.uploaded_image.name +
-  //     "', '" +
-  //     user.shipping_charge +
-  //     "', '" +
-  //     user.product_availability +
-  //     "', '" +
-  //     user.product_stock +
-  //     "', '" +
-  //     user.last_update +
-  //     "', '" +
-  //     user.email +
-  //     "')";
-  //   db.execute(sql, function (status) {
-  //     callback(status);
-  //   });
-  // },
+  insertProduct: function (user, callback) {
+    var sql =
+      "INSERT INTO products (category_ID, sub_category_ID, product_name, product_brand, product_price, product_discount, product_description, product_image, shipping_cost,product_availability, in_stock, creation_date, store) VALUES ('" +
+      user.category +
+      "' , '" +
+      user.sub_category +
+      "' , '" +
+      user.product_name +
+      "', '" +
+      user.product_brand +
+      "', '" +
+      user.price +
+      "', '" +
+      user.product_discount +
+      "', '" +
+      user.product_description +
+      "', '" +
+      user.image +
+      "', '" +
+      user.shipping_charge +
+      "', '" +
+      user.product_availability +
+      "', '" +
+      user.product_stock +
+      "', '" +
+      user.last_update +
+      "', '" +
+      user.email +
+      "')";
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
 
   getAllProducts: function (user, callback) {
     var sql =
-      "SELECT products.product_name AS productname, products.product_brand AS productbrand, products.product_availability AS productavailability, products.in_stock AS instock, products.product_price AS productprice, products.creation_date AS creationdate ,  products.last_update AS lastupdate,  products.id AS productid ,category.category_name AS categoryname, subcategory.sub_category_name AS subcategoryname FROM products JOIN category ON products.category_ID = category.id JOIN subcategory ON products.sub_category_ID = subcategory.id WHERE products.store='" +
+      "SELECT products.product_name AS productname, products.product_brand AS productbrand, products.product_availability AS productavailability, products.in_stock AS instock, products.product_price AS productprice, products.creation_date AS creationdate ,  products.last_update AS lastupdate,  products.id AS productid,  products.product_image AS productimage ,category.category_name AS categoryname, subcategory.sub_category_name AS subcategoryname FROM products JOIN category ON products.category_ID = category.id JOIN subcategory ON products.sub_category_ID = subcategory.id WHERE products.store='" +
       user.email +
       "'";
     db.getResults(sql, function (results) {
@@ -342,7 +360,7 @@ module.exports = {
 
   getProductsById: function (user, callback) {
     var sql =
-      "SELECT products.product_name AS productname, products.product_brand AS productbrand,products.shipping_cost AS shippingcost,products.product_description AS productdescription, products.product_availability AS productavailability, products.in_stock AS instock, products.product_price AS productprice, products.creation_date AS creationdate ,  products.last_update AS lastupdate,  products.id AS productid ,category.category_name AS categoryname, subcategory.sub_category_name AS subcategoryname FROM products JOIN category ON products.category_ID = category.id JOIN subcategory ON products.sub_category_ID = subcategory.id WHERE products.store='" +
+      "SELECT products.product_name AS productname, products.product_brand AS productbrand,products.shipping_cost AS shippingcost,products.product_description AS productdescription, products.product_availability AS productavailability, products.in_stock AS instock, products.product_price AS productprice, products.creation_date AS creationdate ,  products.last_update AS lastupdate,  products.id AS productid,  products.product_image AS productimage ,category.category_name AS categoryname, subcategory.sub_category_name AS subcategoryname FROM products JOIN category ON products.category_ID = category.id JOIN subcategory ON products.sub_category_ID = subcategory.id WHERE products.store='" +
       user.email +
       "' AND products.id='" +
       user.id +

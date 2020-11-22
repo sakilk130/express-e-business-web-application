@@ -3,7 +3,7 @@
   <head>
     <!-- Basic Page Info -->
     <meta charset="utf-8" />
-    <title>Shop Name</title>
+    <title><%=admininfo[0].store_name %></title>
 
     <!-- Site favicon -->
     <link
@@ -66,6 +66,15 @@
         <div class="menu-icon dw dw-menu"></div>
       </div>
       <div class="header-right">
+        <div class="user-notification">
+          <a style="color: white; height: 10px; width: 10px" href="/store">
+            <i
+              style="height: 10px; width: 10px"
+              class="icon-copy dw dw-worldwide-1"
+            ></i>
+            Go To Store
+          </a>
+        </div>
         <div class="user-info-dropdown">
           <div class="dropdown">
             <a
@@ -202,7 +211,13 @@
               <% for(var i=0; i< products.length; i++ ){ %>
               <tr>
                 <td class="table-plus"><%= i+1 %></td>
-                <td>img</td>
+                <td>
+                  <img
+                    style="height: 50px; width: 70px"
+                    src="http://localhost:3000/abc/uploads/<%=products[i].productimage%>"
+                    alt=""
+                  />
+                </td>
                 <td><%=products[i].productname %></td>
                 <td><%=products[i].categoryname %></td>
                 <td><%=products[i].subcategoryname %></td>

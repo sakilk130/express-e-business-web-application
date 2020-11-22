@@ -220,7 +220,7 @@
                 <div class="widget-data">
                   <div class="h4 mb-0">Total Products</div>
                   <div class="weight-600 font-14">
-                    <%=admininfo[0].id %> products
+                    <%=productsCount.length %> products
                   </div>
                 </div>
               </div>
@@ -236,7 +236,9 @@
                 </div>
                 <div class="widget-data">
                   <div class="h4 mb-0">Pending Orders</div>
-                  <div class="weight-600 font-14">500 products</div>
+                  <div class="weight-600 font-14">
+                    <%=pendingOrder.length %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -275,28 +277,40 @@
         </div>
 
         <div class="card-box mb-30">
-          <h2 class="h4 pd-20">Selling Products</h2>
-          <table class="data-table table nowrap">
+          <h2 class="h4 pd-20">Recent Orders</h2>
+          <table class="table table-bordered">
             <thead>
               <tr>
-                <th class="table-plus datatable-nosort">Product Name</th>
+                <th>S.N</th>
                 <th>Name</th>
-                <th>Color</th>
+                <th>Email</th>
+                <th>Contact No.</th>
+                <th>Shipping Address</th>
+                <th>Product Details</th>
                 <th>Quantity</th>
                 <th>Price</th>
+                <th>Order Date</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
+              <% for(var i=0; i< orders.length; i++ ){ %>
               <tr>
-                <td class="table-plus">ASUS Laptop</td>
-                <td>by Sakil Khan</td>
-                <td>Black</td>
-                <td>1</td>
-                <td>20,000 BDT</td>
-                <td>Paid</td>
-                <td></td>
+                <td class="table-plus"><%= i+1 %></td>
+                <td><%=orders[i].username %></td>
+                <td><%=orders[i].useremail %></td>
+                <td><%=orders[i].userphone %></td>
+                <td><%=orders[i].useraddress %></td>
+                <td>
+                  <%=orders[i].productbrand %> <%=orders[i].productname %>
+                  (<%=orders[i].productdescription %>)
+                </td>
+                <td><%=orders[i].orderquantity %></td>
+                <td><%=orders[i].productprice %></td>
+                <td><%=orders[i].ordersorder_date %></td>
+                <td><%=orders[i].ordersstatus %></td>
               </tr>
+              <% } %>
             </tbody>
           </table>
         </div>
