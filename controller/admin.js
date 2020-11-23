@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const admin_model = require.main.require('./models/admin_model');
-var mysql = require('mysql');
 const path = require('path');
+const yup = require('yup');
 
 // Admin Index Page Render
 router.get('/', (req, res) => {
@@ -57,18 +57,40 @@ router.post('/change_password', (req, res) => {
     c_new_password: req.body.c_new_password,
     registration_date: new Date().toLocaleDateString(),
   };
-  admin_model.getByEmail(admininfo, function (results) {
-    if (admininfo.old_password === results[0].password) {
-      if (admininfo.new_password === admininfo.c_new_password) {
-        admin_model.updateAdminPass(admininfo, function (status) {
-          res.redirect('/admin');
-        });
-      } else {
-        res.send('Not Update');
-      }
+
+  const changePasswordSchema = yup.object().shape({
+    old_password: yup.string().min(4).max(19).required(),
+    new_password: yup.string().min(4).max(19).required(),
+    c_new_password: yup.string().min(4).max(19).required(),
+  });
+
+  changePasswordSchema.isValid(admininfo).then(function (valid) {
+    if (valid) {
+      admin_model.getByEmail(admininfo, function (results) {
+        if (admininfo.old_password === results[0].password) {
+          if (admininfo.new_password === admininfo.c_new_password) {
+            admin_model.updateAdminPass(admininfo, function (status) {
+              res.send(
+                '<script>alert("Password Change Successful"); window.location.href ="/admin"; </script>'
+              );
+            });
+          } else {
+            res.send('Not Update');
+          }
+        } else {
+          res.send(
+            '<script>alert("Password Not Match"); window.location.href ="/admin/change_password"; </script>'
+          );
+        }
+      });
     } else {
-      res.send('Password Not Match');
+      res.send(
+        '<script>alert("Change Password Error"); window.location.href ="/admin/change_password"; </script>'
+      );
     }
+  });
+  changePasswordSchema.validate(admininfo).catch(function (err) {
+    res.render('admin/error-page/chnagePasswordErr', { error: err.errors });
   });
 });
 // View All Customers Page Render
@@ -126,7 +148,7 @@ router.post('/add_new_customer', (req, res) => {
     });
   } else {
     res.send(
-      ' <script>alerCustomert("Password Not Match"); window.location.href ="/admin/add_new_customer";</script>'
+      ' <script>alert("Password Not Match"); window.location.href ="/admin/add_new_customer";</script>'
     );
   }
 });
@@ -477,12 +499,34 @@ router.post('/add_category', (req, res) => {
     creation_date: new Date().toLocaleDateString(),
     store: req.cookies['uname'],
   };
-  admin_model.insertCategory(category, function (status) {
-    if (status) {
-      res.redirect('/admin/all_categories');
+  const createSchema = yup.object().shape({
+    category_name: yup.string().min(3).max(19).required(),
+    drescription: yup.string().max(150).required(),
+    creation_date: yup.string().required(),
+    store: yup.string().email().required(),
+  });
+
+  createSchema.isValid(category).then(function (valid) {
+    if (valid === true) {
+      admin_model.insertCategory(category, function (status) {
+        if (status) {
+          res.send(
+            ' <script>alert("Added New Category"); window.location.href ="/admin/all_categories";</script>'
+          );
+        } else {
+          res.send(
+            ' <script>alert("Failed !!"); window.location.href ="/admin/add_category";</script>'
+          );
+        }
+      });
     } else {
-      res.send(user);
+      res.send(
+        ' <script>alert("Failed !!"); window.location.href ="/admin/add_category";</script>'
+      );
     }
+  });
+  createSchema.validate(category).catch(function (err) {
+    res.render('admin/error-page/addCategoryErr', { error: err.errors });
   });
 });
 
@@ -513,12 +557,34 @@ router.post('/add_sub_category', (req, res) => {
     creation_date: new Date().toLocaleDateString(),
     store: req.cookies['uname'],
   };
-  admin_model.insertSubCategory(category, function (status) {
-    if (status) {
-      res.redirect('/admin/all_sub_categories');
+  const createSchema = yup.object().shape({
+    category: yup.number().required(),
+    sub_category: yup.string().min(4).max(19).required(),
+    creation_date: yup.string().required(),
+    store: yup.string().email().required(),
+  });
+
+  createSchema.isValid(category).then(function (valid) {
+    if (valid === true) {
+      admin_model.insertSubCategory(category, function (status) {
+        if (status) {
+          res.send(
+            ' <script>alert("Added Sub-Category"); window.location.href ="/admin/all_sub_categories";</script>'
+          );
+        } else {
+          res.send(
+            ' <script>alert("Failed !!"); window.location.href ="/admin/add_sub_category";</script>'
+          );
+        }
+      });
     } else {
-      res.send(user);
+      res.send(
+        ' <script>alert("Failed !!"); window.location.href ="/admin/add_sub_category";</script>'
+      );
     }
+  });
+  createSchema.validate(category).catch(function (err) {
+    res.render('admin/error-page/addSubCategoryErr', { error: err.errors });
   });
 });
 

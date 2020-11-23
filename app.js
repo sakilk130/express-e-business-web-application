@@ -9,7 +9,7 @@ const admin = require('./controller/admin');
 const logout = require('./controller/logout');
 const home = require('./controller/home');
 const register = require('./controller/register');
-const store = require('./controller/store');
+const store = require('./controller/store/home');
 const app = express();
 
 //config
