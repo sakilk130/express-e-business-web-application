@@ -13,6 +13,9 @@ const store = require('./controller/store/home');
 const clogin = require('./controller/store/clogin');
 const product = require('./controller/store/product');
 const cart = require('./controller/store/cart');
+const superadminlogin = require('./controller/superadmin/superadminlogin');
+const dash = require('./controller/superadmin/dash');
+const shop = require('./controller/superadmin/shop');
 
 const app = express();
 
@@ -41,6 +44,9 @@ app.use('/store', store);
 app.use('/clogin', clogin);
 app.use('/product', product);
 app.use('/cart', cart);
+app.use('/dash', dash);
+app.use('/superadminlogin', superadminlogin);
+app.use('/shop', shop);
 //route
 
 app.get('*', (req, res) => {

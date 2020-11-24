@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shop List Page</title>
+  </head>
+  <body>
+    <h3>Shop List</h3>
+
+    <a href="/dash">Back</a> |
+    <a href="/logout">logout</a>
+    <br />
+
+    <table border="1">
+      <tr>
+        <td>ID</td>
+        <td>NAME</td>
+        <td>LOCATION</td>
+        <td>PHONE NUMBER</td>
+        <td>CATEGORY</td>
+        <td>EMAIL</td>
+        <td>STORE NAME</td>
+        <td>Action</td>
+      </tr>
+
+      <% for(var i=0; i< shoplist.length; i++ ){ %>
+      <tr>
+        <td><%= shoplist[i].id %></td>
+        <td><%= shoplist[i].username %></td>
+        <td><%= shoplist[i].address %></td>
+        <td><%= shoplist[i].phone %></td>
+        <td><%= shoplist[i].type %></td>
+        <td><%= shoplist[i].email %></td>
+        <td><%= shoplist[i].store_name %></td>
+        <td>
+          <a href="/shop/edit/<%=shoplist[i].id%>">Edit</a> |
+          <a href="/shop/delete/<%=shoplist[i].id%>">Delete</a>
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  </body>
+</html>
