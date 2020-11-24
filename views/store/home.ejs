@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title><%=admininfo[0].store_name %></title>
+    <title>Home | E-Shopper</title>
     <link href="/abc/store/home/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/abc/store/home/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/abc/store/home/css/prettyPhoto.css" rel="stylesheet" />
@@ -92,7 +92,7 @@
           <div class="row">
             <div class="col-md-4 clearfix">
               <div class="logo pull-left">
-                <a href="/home"
+                <a href="/store"
                   ><img src="/abc/store/home/images/home/logo.png" alt=""
                 /></a>
               </div>
@@ -101,12 +101,17 @@
               <div class="shop-menu clearfix pull-right">
                 <ul class="nav navbar-nav">
                   <li>
-                    <a href="/login"><i class="fa fa-user"></i>Account</a>
+                    <a href="/clogin"
+                      ><i class="fa fa-user"></i> <%= customer[0].name %></a
+                    >
                   </li>
                   <li>
-                    <a href="cart.html"
+                    <a href="/cart/<%= customer[0].id %>"
                       ><i class="fa fa-shopping-cart"></i> Cart</a
                     >
+                  </li>
+                  <li>
+                    <a href="/logout"><i class="fa fa-lock"></i> Logout</a>
                   </li>
                 </ul>
               </div>
@@ -136,15 +141,15 @@
               </div>
               <div class="mainmenu pull-left">
                 <ul class="nav navbar-nav collapse navbar-collapse">
-                  <li><a href="/home" class="active">Home</a></li>
+                  <li><a href="/store" class="active">Home</a></li>
                   <li class="dropdown">
                     <a href="#">Catagory<i class="fa fa-angle-down"></i></a>
                     <ul role="menu" class="sub-menu">
                       <% for(var i=0; i< category.length; i++ ){ %>
                       <li>
-                        <a href="/category/<%= category[i].id %>">
-                          <%= category[i].category_name %>
-                        </a>
+                        <a href="/category/<%= category[i].category_id %>"
+                          ><%= category[i].category_name %></a
+                        >
                       </li>
                       <% } %>
                     </ul>
@@ -297,7 +302,7 @@
               <h2>Category</h2>
               <div class="panel-group category-products" id="accordian">
                 <!--category-productsr-->
-
+                <!-- <% for(var i=0; i< category.length; i++ ){ %>
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h4 class="panel-title">
@@ -309,6 +314,7 @@
                         <span class="badge pull-right"
                           ><i class="fa fa-plus"></i
                         ></span>
+                        <%= category[i].category_name %>
                       </a>
                     </h4>
                   </div>
@@ -316,19 +322,17 @@
                     <div class="panel-body">
                       <ul>
                         <li><a href="#">Nike </a></li>
-                        <li><a href="#">Under Armour </a></li>
-                        <li><a href="#">Adidas </a></li>
-                        <li><a href="#">Puma</a></li>
-                        <li><a href="#">ASICS </a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
+                <% } %> -->
+
                 <% for(var i=0; i< category.length; i++ ){ %>
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h4 class="panel-title">
-                      <a href="/category/<%= category[i].id %>"
+                      <a href="/category/<%= category[i].category_id %>"
                         ><%= category[i].category_name %></a
                       >
                     </h4>
@@ -378,7 +382,7 @@
 
               <div class="shipping text-center">
                 <!--shipping-->
-                <img src="/abc/store/home/images/home/shipping.jpg" alt="" />
+                <img src="/abc/home/images/home/shipping.jpg" alt="" />
               </div>
               <!--/shipping-->
             </div>
@@ -388,31 +392,30 @@
             <div class="features_items">
               <!--features_items-->
               <h2 class="title text-center">All Items</h2>
-              <!-- product length -->
-              <% for(var i=0; i< products.length; i++ ){ %>
+              <% for(var i=0; i< product.length; i++ ){ %>
               <div class="col-sm-4">
                 <div class="product-image-wrapper" style="display: inlne-block">
                   <div class="single-products">
                     <div class="productinfo text-center">
                       <img
-                        src="http://localhost:3000/abc/uploads/<%=products[i].product_image  %> "
+                        src="http://localhost:3000/abc/uploads/<%= product[i].product_image %>"
                         height="240px"
                         alt=""
                       />
-                      <h2>$<%= products[i].product_price %></h2>
-                      <p><%= products[i].product_name %></p>
+                      <h2>$<%= product[i].product_price %></h2>
+                      <p><%= product[i].product_name %></p>
                       <a
-                        href="/product/<%= products[i].id %>"
+                        href="/product/<%= product[i].id %>"
                         class="btn btn-default add-to-cart"
                         ><i class="fa fa-shopping-cart"></i>View product</a
                       >
                     </div>
                     <div class="product-overlay">
                       <div class="overlay-content">
-                        <h2>$<%= products[i].product_price %></h2>
-                        <p><%= products[i].product_name %></p>
+                        <h2>$<%= product[i].product_price %></h2>
+                        <p><%= product[i].product_name %></p>
                         <a
-                          href="/product/<%= products[i].id %>"
+                          href="/product/<%= product[i].id %>"
                           class="btn btn-default add-to-cart"
                           ><i class="fa fa-shopping-cart"></i>View product</a
                         >
@@ -448,10 +451,7 @@
                 <div class="video-gallery text-center">
                   <a href="#">
                     <div class="iframe-img">
-                      <img
-                        src="/abc/store/home/images/home/iframe1.png"
-                        alt=""
-                      />
+                      <img src="/abc/home/images/home/iframe1.png" alt="" />
                     </div>
                     <div class="overlay-icon">
                       <i class="fa fa-play-circle-o"></i>

@@ -10,6 +10,10 @@ const logout = require('./controller/logout');
 const home = require('./controller/home');
 const register = require('./controller/register');
 const store = require('./controller/store/home');
+const clogin = require('./controller/store/clogin');
+const product = require('./controller/store/product');
+const cart = require('./controller/store/cart');
+
 const app = express();
 
 //config
@@ -34,9 +38,9 @@ app.use('/login', login);
 app.use('/admin', admin);
 app.use('/logout', logout);
 app.use('/store', store);
-
-// app.use('/user', user);
-
+app.use('/clogin', clogin);
+app.use('/product', product);
+app.use('/cart', cart);
 //route
 
 app.get('*', (req, res) => {
