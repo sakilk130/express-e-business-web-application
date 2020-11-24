@@ -8,13 +8,18 @@ module.exports = {
       "' and password='" +
       user.password +
       "'";
-    db.getResults(sql, function (results) {
-      if (results.length > 0) {
-        callback(true);
-      } else {
-        callback(false);
-      }
-    });
+
+    try {
+      db.getResults(sql, function (results) {
+        if (results.length > 0) {
+          callback(true);
+        } else {
+          callback(false);
+        }
+      });
+    } catch (error) {
+      console.log('db error', error);
+    }
   },
   getById: function (user, callback) {
     var sql = "SELECT * FROM customers WHERE id='" + user.id + "'";

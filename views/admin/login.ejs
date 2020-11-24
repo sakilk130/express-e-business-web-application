@@ -78,6 +78,7 @@
               <form method="POST">
                 <div class="input-group custom">
                   <input
+                    id="emailInput"
                     type="email"
                     class="form-control form-control-lg"
                     name="email"
@@ -92,6 +93,7 @@
                 </div>
                 <div class="input-group custom">
                   <input
+                    id="passwordInput"
                     type="password"
                     class="form-control form-control-lg"
                     name="password"
@@ -112,6 +114,7 @@
                         class="custom-control-input"
                         id="customCheck1"
                       />
+
                       <label class="custom-control-label" for="customCheck1"
                         >Remember</label
                       >
@@ -123,11 +126,16 @@
                     </div>
                   </div>
                 </div>
+                <div style="color: red; padding-bottom: 20px">
+                  <ul id="errorBlock"></ul>
+                </div>
+
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="input-group mb-0">
                       <!-- Submit -->
                       <input
+                        id="signInBtn"
                         class="btn btn-primary btn-lg btn-block"
                         type="submit"
                         name="submit"
@@ -148,10 +156,48 @@
         </div>
       </div>
     </div>
+
     <!-- js -->
     <script src="/abc/scripts/core.js"></script>
     <script src="/abc/scripts/script.min.js"></script>
     <script src="/abc/scripts/process.js"></script>
     <script src="/abc/scripts/layout-settings.js"></script>
+
+    <!-- ajax -->
+
+    <script>
+      $(document).ready(function () {
+        $('#signInBtn').click((e) => {
+          e.preventDefault();
+
+          var email = $('#emailInput').val();
+          var password = $('#passwordInput').val();
+
+          $.ajax({
+            url: '/login',
+            data: { email, password },
+            method: 'post',
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (data) {
+              console.log('success', data);
+              window.location.replace('/admin');
+            },
+            error: function (err) {
+              console.log(err.responseJSON);
+
+              let errorMessages = '';
+
+              for (var i = 0; i < err.responseJSON.message.length; i++) {
+                errorMessages += `<li>${err.responseJSON.message[i]}</li>`;
+              }
+
+              console.log(errorMessages);
+
+              $('#errorBlock').html(errorMessages);
+            },
+          });
+        });
+      });
+    </script>
   </body>
 </html>

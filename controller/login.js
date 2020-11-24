@@ -17,25 +17,50 @@ router.post('/', (req, res) => {
     password: yup.string().min(4).required(),
   });
 
-  loginSchema.isValid(user).then(function (valid) {
-    if (valid === true) {
+  // loginSchema.isValid(user).then(function (valid) {
+  //   if (valid === true) {
+  //     admin_model.validate(user, function (status) {
+  //       console.log(status);
+  //       if (status) {
+  //         res.cookie('uname', req.body.email);
+  //         res.redirect('/admin');
+  //       } else {
+  //         res.send(
+  //           ' <script>alert("User Not found"); window.location.href ="/login";</script>'
+  //         );
+  //       }
+  //     });
+  //   } else {
+  //     console.log('Login Error');
+  //   }
+  // });
+
+  loginSchema
+    .validate(user)
+    .then(() => {
       admin_model.validate(user, function (status) {
-        console.log(status);
+        console.log('admin validation', status);
+
         if (status) {
           res.cookie('uname', req.body.email);
-          res.redirect('/admin');
+          res.status(200).json({
+            error: false,
+            success: true,
+          });
         } else {
-          res.send(
-            ' <script>alert("User Not found"); window.location.href ="/login";</script>'
-          );
+          res.status(401).json({
+            error: true,
+            message: ['user not found'],
+          });
         }
       });
-    } else {
-      console.log('Login Error');
-    }
-  });
-  loginSchema.validate(user).catch(function (err) {
-    res.render('admin/error-page/loginErr', { error: err.errors });
-  });
+    })
+    .catch((err) => {
+      res.status(400).json({
+        error: true,
+        message: err.errors,
+      });
+    });
 });
+
 module.exports = router;
